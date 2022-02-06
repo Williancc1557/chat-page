@@ -1,4 +1,4 @@
-const socket = io.connect('localhost:3000', { transports: ['websocket'] });
+const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
 
 const renderMessage = (message) => {
     $(".messages").append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
