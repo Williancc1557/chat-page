@@ -17,7 +17,7 @@ html, body {
 }
 
 input {
-  width: 600px;
+  width: 70%;
   border: 1px solid #ddd;
   height: 50px;
   padding: 0 20px;
@@ -25,7 +25,7 @@ input {
 }
 
 button {
-  width: 600px;
+  width: 70%;
   height: 50px;
   font-size: 14px;
   background: #069;
@@ -37,7 +37,7 @@ button {
 }
 
 .messages {
-  width: 600px;
+  width: 70%;
   height: 400px;
   margin: 20px 0;
   border: 1px solid #ddd;
