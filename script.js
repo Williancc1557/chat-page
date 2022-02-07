@@ -7,7 +7,7 @@ const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: [
 
 const xssFilterConfig = {
     whiteList: {
-        audio: ["false"],
+        h1: ["false"],
     }
 }
 
