@@ -3,10 +3,10 @@ $(".messages").animate({ scrollTop: 20000000 }, "slow");
 /* const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
  */
 
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
 
 const renderMessage = (message) => {
-    $(".messages").append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
+    $(".messages").append('<div class="message"><strong>' + filterXSS(message.author) + '</strong>: ' + filterXSS(message.message) + '</div>')
 };
 
 
