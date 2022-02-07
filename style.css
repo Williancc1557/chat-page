@@ -1,8 +1,10 @@
 html, body {
+  background-color: rgb(15, 15, 15);
   height: 100%;
 }
 
 * {
+  color: white;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,14 +20,39 @@ html, body {
 
 input {
   width: 70%;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(83, 83, 83, 0.767);
   height: 50px;
   padding: 0 20px;
   font-size: 14px;
+  border-radius: 10px;
+}
+
+
+.message {
+  width: auto;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid rgba(68, 68, 68, 0.541);
+  border-radius: 10px;
+}
+
+.username {
+  background-color: rgb(35, 50, 82);
+}
+
+.message_input {
+  background-color: rgb(56, 56, 56);
+}
+
+.message_panel {
+  display: flex;
+  width: 70%;
+  align-items: center;
 }
 
 button {
-  width: 70%;
+  cursor: pointer;
+  width: 25%;
   height: 50px;
   font-size: 14px;
   background: #069;
@@ -33,16 +60,18 @@ button {
   line-height: 50px;
   font-weight: bold;
   color: #FFF;
-  margin-top: 10px;
+  margin-left: 0.5rem;
+  border-radius: 10px;
 }
 
 .messages {
   width: 70%;
   height: 400px;
   margin: 20px 0;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(68, 68, 68, 0.541);;
   padding: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
   word-wrap: break-word;
+  border-radius: 10px;
 }
