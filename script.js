@@ -1,10 +1,5 @@
-$(".messages").animate({ scrollTop: 20000000 }, "slow");
-
-/* const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
- */
-
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
-
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
+const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
         h1: ["false"],
@@ -12,7 +7,16 @@ const xssFilterConfig = {
 }
 
 const renderMessage = (message) => {
-    $(".messages").append('<div class="message"><strong>' + filterXSS(message.author, xssFilterConfig) + '</strong>: ' + filterXSS(message.message, xssFilterConfig) + '</div>')
+    const div = document.createElement("div")
+    const strongAuthor = document.createElement("strong")
+    strongAuthor.append(filterXSS(message.author, xssFilterConfig) + " : ")
+
+    div.setAttribute("class", "message")
+    div.append(strongAuthor)
+    div.append(message.message)
+
+    messages.append(div)
+    messages.scrollTo(0, messages.scrollHeight)
 };
 
 
@@ -20,14 +24,16 @@ socket.on("previusMessage", (message) => {
     for (message of message) {
         setInterval(renderMessage(message), 300)
     };
+    messages.scrollTo(0, messages.scrollHeight)
 });
+
+
 socket.on("receivedMessage", (message) => {
     renderMessage(message);
 });
 
 $("#chat").submit(event => {
     event.preventDefault();
-    $(".messages").animate({ scrollTop: 20000000 }, "slow");
 
     const author = $("input[name=username]").val();
     const message = $("input[name=message]").val();
