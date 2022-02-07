@@ -3,16 +3,22 @@ $(".messages").animate({ scrollTop: 20000000 }, "slow");
 /* const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
  */
 
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
+
+const xssFilterConfig = {
+    whiteList: {
+        audio: ["false"],
+    }
+}
 
 const renderMessage = (message) => {
-    $(".messages").append('<div class="message"><strong>' + filterXSS(message.author) + '</strong>: ' + filterXSS(message.message) + '</div>')
+    $(".messages").append('<div class="message"><strong>' + filterXSS(message.author, xssFilterConfig) + '</strong>: ' + filterXSS(message.message, xssFilterConfig) + '</div>')
 };
 
 
 socket.on("previusMessage", (message) => {
     for (message of message) {
-        renderMessage(message)
+        setInterval(renderMessage(message), 300)
     };
 });
 socket.on("receivedMessage", (message) => {
