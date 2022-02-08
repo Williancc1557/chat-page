@@ -6,7 +6,14 @@ const xssFilterConfig = {
     }
 }
 
-const renderMessage = (message) => {
+const renderMessage = (message, error = false) => {
+    if (error) {
+        const div = document.createElement("div")
+        div.setAttribute("class", "error")
+        div.append(message)
+        return messages.append(div)
+    }
+
     const div = document.createElement("div")
     const strongAuthor = document.createElement("strong")
     strongAuthor.append(filterXSS(message.author, xssFilterConfig) + " : ")
@@ -19,6 +26,9 @@ const renderMessage = (message) => {
     messages.scrollTo(0, messages.scrollHeight)
 };
 
+socket.on("rateLimit", (author) => {
+    renderMessage(`${author} foi mutado por 2 minutos.`, true)
+})
 
 socket.on("previusMessage", (message) => {
     for (message of message) {
@@ -32,7 +42,7 @@ socket.on("receivedMessage", (message) => {
     renderMessage(message);
 });
 
-$("#chat").submit(event => {
+$("#chat").submit(async (event) => {
     event.preventDefault();
 
     const author = $("input[name=username]").val();
