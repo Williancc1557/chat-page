@@ -1,4 +1,4 @@
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
 const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
@@ -28,11 +28,11 @@ const renderMessage = (message, error = false) => {
 
 const muteChatMessage = (messageInput) => {
     document.getElementById("message").disabled = true;
-    document.getElementById("message").placeholder = "Você foi mutado por 2 minutos"
+    document.getElementById("message").placeholder = "you was muted for 2 minutes"
 }
 
 
-socket.on("rateLimit", (message) => {
+socket.on("sendError", (message) => {
     const messageInput = document.getElementById("message")
     renderMessage(message, true)
 })
@@ -43,7 +43,7 @@ socket.on("blockChat", (message) => {
     renderMessage(message, true)
     setInterval(() => {
         messageInput.disabled = false
-        messageInput.placeholder = "Digite sua mensagem"
+        messageInput.placeholder = "Send your message"
     }, 120000);
 })
 
