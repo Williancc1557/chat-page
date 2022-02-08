@@ -26,8 +26,20 @@ const renderMessage = (message, error = false) => {
     messages.scrollTo(0, messages.scrollHeight)
 };
 
-socket.on("rateLimit", (author) => {
-    renderMessage(`${author} foi mutado por 2 minutos.`, true)
+const muteChatMessage = (messageInput) => {
+    document.getElementById("message").disabled = true;
+    document.getElementById("message").placeholder = "Você foi mutado por 2 minutos"
+}
+
+
+socket.on("rateLimit", (message) => {
+    const messageInput = document.getElementById("message")
+    muteChatMessage(messageInput)
+    renderMessage(message, true)
+    setInterval(() => {
+        messageInput.disabled = false
+        messageInput.placeholder = "Digite sua mensagem"
+    }, 120000);
 })
 
 socket.on("previusMessage", (message) => {
@@ -39,10 +51,10 @@ socket.on("previusMessage", (message) => {
 
 
 socket.on("receivedMessage", (message) => {
-    renderMessage(message);
+    renderMessage(messageInput);
 });
 
-$("#chat").submit(async (event) => {
+$("#chat").submit((event) => {
     event.preventDefault();
 
     const author = $("input[name=username]").val();
