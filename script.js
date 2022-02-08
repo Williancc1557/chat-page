@@ -34,7 +34,6 @@ const muteChatMessage = (messageInput) => {
 
 socket.on("rateLimit", (message) => {
     const messageInput = document.getElementById("message")
-    muteChatMessage(messageInput)
     renderMessage(message, true)
 })
 
