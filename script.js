@@ -1,4 +1,4 @@
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
 const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
@@ -56,7 +56,7 @@ socket.on("previusMessage", (message) => {
 
 
 socket.on("receivedMessage", (message) => {
-    renderMessage(messageInput);
+    renderMessage(message);
 });
 
 $("#chat").submit((event) => {
