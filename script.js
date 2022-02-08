@@ -1,4 +1,4 @@
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
 const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
@@ -33,6 +33,12 @@ const muteChatMessage = (messageInput) => {
 
 
 socket.on("rateLimit", (message) => {
+    const messageInput = document.getElementById("message")
+    muteChatMessage(messageInput)
+    renderMessage(message, true)
+})
+
+socket.on("blockChat", (message) => {
     const messageInput = document.getElementById("message")
     muteChatMessage(messageInput)
     renderMessage(message, true)
