@@ -16,6 +16,8 @@ socket.emit("ReceiveAllMessages", {
 })
 
 socket.on("ReceiveMessages", (message) => {
+    console.log(message)
+    if (message[0].key && message[0].key != key) return
     for (let msg of message) {
         renderMessage(msg)
     }
