@@ -1,10 +1,27 @@
-const socket = io.connect('https://api-chat-page.herokuapp.com', { transports: ['websocket'] });
+const socket = io.connect('https://willchat-socket-production.up.railway.app/', { transports: ['websocket'] });
 const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
         h1: ["false"],
     }
 }
+
+var url = new URL(window.location.href);
+var key = url.searchParams.get("key")
+
+console.log(key)
+
+socket.emit("ReceiveAllMessages", {
+    key
+})
+
+socket.on("ReceiveMessages", (message) => {
+    for (let msg of message) {
+        renderMessage(msg)
+    }
+})
+
+
 
 const renderMessage = (message, error = false) => {
     if (error) {
@@ -16,7 +33,7 @@ const renderMessage = (message, error = false) => {
 
     const div = document.createElement("div")
     const strongAuthor = document.createElement("strong")
-    strongAuthor.append(filterXSS(message.author, xssFilterConfig) + " : ")
+    strongAuthor.append(filterXSS(message.userName, xssFilterConfig) + " : ")
 
     div.setAttribute("class", "message")
     div.append(strongAuthor)
@@ -25,6 +42,42 @@ const renderMessage = (message, error = false) => {
     messages.append(div)
     messages.scrollTo(0, messages.scrollHeight)
 };
+
+
+$("#chat").submit((event) => {
+    event.preventDefault();
+
+    const userName = $("input[name=username]").val();
+    const message = $("input[name=message]").val();
+
+    if (userName.length && message.length) {
+        const messageConfig = {
+            userName,
+            message,
+            key,
+            userId: "123"
+        };
+
+        renderMessage(messageConfig);
+        document.querySelector("input[name=message]").value = "";
+        socket.emit('SendMessage', messageConfig);
+    };
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const muteChatMessage = (messageInput) => {
     document.getElementById("message").disabled = true;
@@ -58,21 +111,3 @@ socket.on("previusMessage", (message) => {
 socket.on("receivedMessage", (message) => {
     renderMessage(message);
 });
-
-$("#chat").submit((event) => {
-    event.preventDefault();
-
-    const author = $("input[name=username]").val();
-    const message = $("input[name=message]").val();
-
-    if (author.length && message.length) {
-        const messageConfig = {
-            author: author,
-            message: message,
-        };
-
-        renderMessage(messageConfig);
-        document.querySelector("input[name=message]").value = "";
-        socket.emit('sendMessage', messageConfig);
-    };
-})
