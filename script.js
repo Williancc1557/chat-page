@@ -1,4 +1,4 @@
-const socket = io.connect('https://willchat-socket-production.up.railway.app/', { transports: ['websocket'] });
+const socket = io.connect(/*'ws://localhost:8080'*/"https://willchat-socket-production.up.railway.app/", { transports: ['websocket'] });
 const messages = document.querySelector(".messages")
 const xssFilterConfig = {
     whiteList: {
@@ -10,14 +10,15 @@ var url = new URL(window.location.href);
 var key = url.searchParams.get("key")
 
 console.log(key)
+socket.emit("JoinGroup", {
+    key
+})
 
 socket.emit("ReceiveAllMessages", {
     key
 })
 
 socket.on("ReceiveMessages", (message) => {
-    console.log(message)
-    if (message[0].key && message[0].key != key) return
     for (let msg of message) {
         renderMessage(msg)
     }
