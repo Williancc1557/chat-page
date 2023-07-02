@@ -1,6 +1,8 @@
-html, body {
+html,
+body {
   background-color: rgb(15, 15, 15);
   height: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 * {
@@ -26,7 +28,6 @@ input {
   font-size: 14px;
   border-radius: 10px;
 }
-
 
 .message {
   width: auto;
@@ -70,7 +71,7 @@ button {
   text-align: center;
   line-height: 50px;
   font-weight: bold;
-  color: #FFF;
+  color: #fff;
   margin-left: 0.5rem;
   border-radius: 10px;
 }
@@ -79,7 +80,7 @@ button {
   width: 70%;
   height: 400px;
   margin: 20px 0;
-  border: 1px solid rgba(68, 68, 68, 0.541);;
+  border: 1px solid rgba(68, 68, 68, 0.541);
   padding: 20px;
   overflow-y: scroll;
   overflow-x: hidden;

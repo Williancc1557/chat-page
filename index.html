@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
-        integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+      integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-<body>
+  <body>
     <form id="chat">
-        <input type="text" name="username" class="username" placeholder="Digite seu usuário">
-        <div class="messages"></div>
-        <div class="message_panel">
-
-            <input type="text" name="message" class="message_input" placeholder="Digite sua mensagem" id="message">
-            <button type="submit">Enviar</button>
-
-        </div>
-
+      <input
+        type="text"
+        name="username"
+        class="username"
+        placeholder="Digite seu usuário"
+      />
+      <div class="messages"></div>
+      <div class="message_panel">
+        <input
+          type="text"
+          name="message"
+          class="message_input"
+          placeholder="Digite sua mensagem"
+          id="message"
+        />
+        <button type="submit">Enviar</button>
+      </div>
     </form>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

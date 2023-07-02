@@ -1,5 +1,4 @@
-const socket = io.connect(/*'ws://localhost:8080'*/"https://willchat-socket-production.up.railway.app/", { transports: ['websocket'] });
-const messages = document.querySelector(".messages")
+const socket = io.connect('https://willchat-socket-production.up.railway.app/', { transports: ['websocket'] });
 const xssFilterConfig = {
     whiteList: {
         h1: ["false"],
@@ -9,31 +8,39 @@ const xssFilterConfig = {
 var url = new URL(window.location.href);
 var key = url.searchParams.get("key")
 
-console.log(key)
+
 socket.emit("JoinGroup", {
     key
 })
+
 
 socket.emit("ReceiveAllMessages", {
     key
 })
 
+
+const messages = document.querySelector(".messages")
+const moveToTheBottom = () => {
+    messages.scrollTo(0, messages.scrollHeight)
+}
+
 socket.on("ReceiveMessages", (message) => {
     for (let msg of message) {
         renderMessage(msg)
     }
+
+    moveToTheBottom()
+})
+
+socket.on("Error", (message) => {
+    const div = document.createElement("div")
+    div.setAttribute("class", "error")
+    div.append(message)
+    messages.append(div)
 })
 
 
-
-const renderMessage = (message, error = false) => {
-    if (error) {
-        const div = document.createElement("div")
-        div.setAttribute("class", "error")
-        div.append(message)
-        return messages.append(div)
-    }
-
+const renderMessage = (message) => {
     const div = document.createElement("div")
     const strongAuthor = document.createElement("strong")
     strongAuthor.append(filterXSS(message.userName, xssFilterConfig) + " : ")
@@ -53,45 +60,26 @@ $("#chat").submit((event) => {
     const userName = $("input[name=username]").val();
     const message = $("input[name=message]").val();
 
-    if (userName.length && message.length) {
-        const messageConfig = {
-            userName,
-            message,
-            key,
-            userId: "123"
-        };
-
-        renderMessage(messageConfig);
-        document.querySelector("input[name=message]").value = "";
-        socket.emit('SendMessage', messageConfig);
+    if (!(userName.length && message.length)) return;
+    const messageConfig = {
+        userName,
+        message,
+        key,
+        userId: "123"
     };
+
+    renderMessage(messageConfig);
+    document.querySelector("input[name=message]").value = "";
+    socket.emit('SendMessage', messageConfig);
 })
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-const muteChatMessage = (messageInput) => {
+/* const muteChatMessage = (messageInput) => {
     document.getElementById("message").disabled = true;
     document.getElementById("message").placeholder = "you was muted for 2 minutes"
 }
-
-
-socket.on("sendError", (message) => {
-    const messageInput = document.getElementById("message")
-    renderMessage(message, true)
-})
 
 socket.on("blockChat", (message) => {
     const messageInput = document.getElementById("message")
@@ -101,16 +89,4 @@ socket.on("blockChat", (message) => {
         messageInput.disabled = false
         messageInput.placeholder = "Send your message"
     }, 120000);
-})
-
-socket.on("previusMessage", (message) => {
-    for (message of message) {
-        setInterval(renderMessage(message), 300)
-    };
-    messages.scrollTo(0, messages.scrollHeight)
-});
-
-
-socket.on("receivedMessage", (message) => {
-    renderMessage(message);
-});
+}) */
