@@ -92,13 +92,19 @@ button {
   width: 15%;
   height: 50px;
   font-size: 14px;
-  background: #069;
+  background: rgb(48, 68, 112);
   text-align: center;
   line-height: 50px;
   font-weight: bold;
   color: #fff;
   margin-left: 0.5rem;
   border-radius: 10px;
+  font-size: 1.1rem;
+  border: none;
+}
+
+button:hover {
+  background: rgb(41, 59, 98);
 }
 
 .messages {
