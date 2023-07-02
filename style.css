@@ -71,10 +71,12 @@ input {
 .username {
   background-color: rgb(35, 50, 82);
   width: 35%;
+  font-size: 1.2rem;
 }
 
 .message_input {
   background-color: rgb(56, 56, 56);
+  font-size: 1.2rem;
 }
 
 .message_panel {
@@ -107,4 +109,5 @@ button {
   overflow-x: hidden;
   word-wrap: break-word;
   border-radius: 10px;
+  font-size: 1.25rem;
 }
