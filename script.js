@@ -41,13 +41,21 @@ socket.on("Error", (message) => {
 
 
 const renderMessage = (message) => {
-    const div = document.createElement("div")
     const strongAuthor = document.createElement("strong")
-    strongAuthor.append(filterXSS(message.userName, xssFilterConfig) + " : ")
+    strongAuthor.append(filterXSS(message.userName, xssFilterConfig))
 
+    const dualPoint = document.createElement("div")
+    dualPoint.append(" : ")
+
+    strongAuthor.append(dualPoint)
+
+    const paragraph = document.createElement("p")
+    paragraph.append(message.message)
+
+    const div = document.createElement("div")
     div.setAttribute("class", "message")
     div.append(strongAuthor)
-    div.append(message.message)
+    div.appendChild(paragraph)
 
     messages.append(div)
     messages.scrollTo(0, messages.scrollHeight)

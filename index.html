@@ -24,25 +24,27 @@
   </head>
 
   <body>
-    <form id="chat">
-      <input
-        type="text"
-        name="username"
-        class="username"
-        placeholder="Digite seu usuário"
-      />
-      <div class="messages"></div>
-      <div class="message_panel">
+    <div class="chat-container">
+      <form id="chat">
         <input
           type="text"
-          name="message"
-          class="message_input"
-          placeholder="Digite sua mensagem"
-          id="message"
+          name="username"
+          class="username"
+          placeholder="Digite seu usuário"
         />
-        <button type="submit">Enviar</button>
-      </div>
-    </form>
+        <div class="messages"></div>
+        <div class="message_panel">
+          <input
+            type="text"
+            name="message"
+            class="message_input"
+            placeholder="Digite sua mensagem"
+            id="message"
+          />
+          <button type="submit">Enviar</button>
+        </div>
+      </form>
+    </div>
 
     <script src="script.js"></script>
   </body>
