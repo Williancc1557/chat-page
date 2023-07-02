@@ -65,10 +65,10 @@ const renderMessage = (message) => {
 $("#chat").submit((event) => {
     event.preventDefault();
 
-    const userName = $("input[name=username]").val();
-    const message = $("input[name=message]").val();
+    const userName = $("input[name=username]").val()
+    const message = $("input[name=message]").val()
 
-    if (!(userName.length && message.length)) return;
+    if (!(userName.replaceAll(" ", "").length && message.replaceAll(" ", "").length)) return;
     const messageConfig = {
         userName,
         message,
