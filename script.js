@@ -1,4 +1,4 @@
-const socket = io.connect('https://willchat-socket-production.up.railway.app/', { transports: ['websocket'] });
+const socket = io.connect('http://54.147.250.151:7070', { transports: ['websocket'] });
 const xssFilterConfig = {
     whiteList: {
         h1: ["false"],
