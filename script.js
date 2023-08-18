@@ -1,4 +1,4 @@
-const socket = io.connect('http://54.147.250.151:7070', { transports: ['websocket'] });
+const socket = io.connect('wss://will-chat.hopto.org:7070/', { transports: ['websocket'] });
 const xssFilterConfig = {
     whiteList: {
         h1: ["false"],
